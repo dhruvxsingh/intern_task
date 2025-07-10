@@ -49,7 +49,7 @@ This is a full-stack web application, designed to **scrape live product data** f
  Vue.js (CLI-based), CSS     
 |
 |
- Dev Tools  
+ DevOps Tools  
 |
  Docker, venv, npm, Git      
 |
@@ -64,7 +64,7 @@ This is a full-stack web application, designed to **scrape live product data** f
 |  (source of data)     |
 +-----------+-----------+
             |
-Scrape via requests + bs4
+Scrape via requests
             |
             v
 +-----------------------+
@@ -84,8 +84,8 @@ Serve as JSON (API: /scraped-content)
 
 🔧 Backend Setup
 # Clone the repo
-git clone https://github.com/dhruvxsingh/croma-scraper.git
-cd croma-scraper
+git clone git@github.com:dhruvxsingh/intern_task.git
+cd intern_task
 
 # Create virtual environment
 python -m venv venv
@@ -116,7 +116,7 @@ npm run serve
 http://localhost:8080
 
 🛠️ Folder Structure
-croma-scraper/
+intern_task/
 │
 ├── backend/
 │   ├── app.py            # Flask API
