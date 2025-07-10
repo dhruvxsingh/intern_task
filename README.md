@@ -84,8 +84,8 @@ Serve as JSON (API: /scraped-content)
 
 🔧 Backend Setup
 # Clone the repo
-git clone https://github.com/dhruvxsingh/croma-scraper.git
-cd croma-scraper
+git clone git@github.com:dhruvxsingh/intern_task.git
+cd intern_task
 
 # Create virtual environment
 python -m venv venv
