@@ -26,7 +26,7 @@ def scrape_page_elements(url):
         discount_tag = card.find("span", class_="discount")
         discount = discount_tag.get_text(strip=True) if discount_tag else "N/A"
 
-        # Save amount (from "Save ₹18,010")
+        # Save amount 
         save_tag = card.find("span", class_="dicount-value")
         save_amount = save_tag.get_text(strip=True) if save_tag else None
 
@@ -38,7 +38,7 @@ def scrape_page_elements(url):
         link_tag = title_tag.find("a") if title_tag else None
         product_url = "https://www.croma.com" + link_tag["href"] if link_tag and link_tag.has_attr("href") else None
 
-        # Product ID (from the div id)
+        # Product ID 
         product_div = card.find("div", class_="cp-product")
         product_id = product_div.get("id") if product_div else None
 

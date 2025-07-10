@@ -9,13 +9,6 @@ r = redis.Redis(host='localhost', port=6379, db=0)
 
 @app.route("/scraped-content", methods=["GET"])
 def get_scraped_content():
-    """
-    TODO: Implement an API to retrieve scraped content from Redis.
-    This endpoint should do the following:
-    2. Retrieve the scraped content from Redis.
-    4. If no data is found, return a 404 error with a message.
-    5. If data is found, return a success response with the data in JSON format.
-    """
     data = r.get("scraped_content")
     if data:
         return jsonify({"success": True, "data": json.loads(data)})
