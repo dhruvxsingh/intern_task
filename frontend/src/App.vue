@@ -2,48 +2,73 @@
   <div class="header">
     <span>CROMA HEADER</span>
   </div>
-  <div>
+  <div class="container">
     <h1>Croma Televisions & Accessories - Product Cards</h1>
+    
     <div class="product-grid">
-      <div> TODO: Implement product cards here. Feel free to create a Product.vue component </div>
-      <div> Add css in the style section below to match the product grid layout on croma.com</div>
-      <div> Use grid layout css if possible.</div>
+      <div
+        v-for="product in products"
+        :key="product.product_id"
+        class="product-card"
+      >
+        <h2>{{ product.title }}</h2>
+        <p><s>{{ product.price }}</s></p>
+        <p class="sale-price">{{ product.sale_price }}</p>
+        <p class="discount">{{ product.discount_message }}</p>
+      </div>
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>
-export default {  
+export default {
   data() {
     return {
-      products: [] // This will hold the products fetched from the backend
-    }
+      products: [],
+    };
   },
-  mounted() {
-    // Fetch the products from the backend service using fetch API
-    // Store the products in the products data property created above
-    fetch('TODO: URL')
-      .then(res => res.json())
-      .then(data => {
-        // TODO
-      })
+  async mounted() {
+    try {
+      const res = await fetch('http://localhost:5000/products');
+      const data = await res.json(); // because this route just returns a raw array
+      this.products = data;
+    } catch (error) {
+      console.error('Failed to fetch products:', error);
+    }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .header {
   background-color: #000;
   padding: 20px;
   text-align: center;
   font-size: 24px;
   font-weight: bold;
-  span {
-    color: #fff;
-  }
 }
-/*  TODO: Product card styles go here */
+.header span {
+  color: #fff;
+}
+.container {
+  padding: 20px;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  background-color: #f9f9f9;
+}
+.sale-price {
+  font-weight: bold;
+  color: green;
+}
+.discount {
+  color: red;
+}
 </style>
-
-
-
