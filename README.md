@@ -1,65 +1,92 @@
-# Full Stack Intern Challenge
+🛍️ Croma Product Scraper – Full Stack Internship Task
+📚 Overview
+This is a full-stack web application, designed to scrape live product data from Croma's Televisions & Accessories page and display the data in a stylish frontend interface. The project uses Python, Flask, Redis, Vue.js, and beautiful custom styling to build an end-to-end pipeline from data scraping to display.
 
-## Project Overview
+🚀 Features
+📦 Scrapes product title, price, discount, and extra offers from Croma.
+📥 Stores scraped data in Redis for fast retrieval.
+🔌 Backend API built with Flask, exposes /scraped-content.
+💅 Frontend built with Vue.js, styled to match dark UI specs.
+🎯 Modular, clean and readable code in both frontend and backend.
+🧩 Tech Stack
+Layer	Technology
+Data	Web Scraping with BeautifulSoup
+Storage	Redis (via Docker)
+Backend	Python 3.8+, Flask
+Frontend	Vue.js (CLI-based), CSS
+DevOps	Docker, venv, npm, Git
+💡 Architecture
+         +-----------------------+
+         |   Croma Website       |
+         |  (source of data)     |
+         +-----------+-----------+
+                     |
+        Scrape via requests + bs4
+                     |
+                     v
+        +-----------------------+
+        |     Backend (Flask)   |
+        |  ↔ Redis (cached data)|
+        +-----------+-----------+
+                     |
+     Serve as JSON   |   API: /scraped-content
+                     v
+        +-----------------------+
+        |     Frontend (Vue.js) |
+        |   Fetch & Render cards|
+        +-----------------------+
 
-Build a Python + Vue.js app that scrapes product card data from [Croma Televisions & Accessories](https://www.croma.com/televisions-accessories/c/997), stores it in Redis, and displays the data on a frontend page.
 
-All sections to be completed by candidate are marked with TODO.
+⚙️ How to Run It Locally
+📌 Requires: Python 3.8+, Docker, and Node.js 14+
 
-## Setup Instructions
+🔧 Backend Setup
+# Clone the repo
+git clone https://github.com/dhruvxsingh/croma-scraper.git
+cd croma-scraper
 
-### Prerequisites
-- Python 3.8+
-- Node.js 14+
-- Redis server (local or Docker)
-- The backend service expects a Redis server running on `localhost:6379`
-
-### Backend
-
-1. Set up a Python virtual environment and activate it:
-```
+# Create and activate virtual environment
 python -m venv venv
-source venv/bin/activate   # On Linux/macOS
-venv\Scripts\activate     # On Windows
-```
-2. Navigate to the backend folder:
-```
-cd backend
-```
-3. Install dependencies:
-```
+source venv/bin/activate      # Windows: venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
-```
-4. Run the scraper (optional: provide your own logic or test with products.json):
-```
-python scraper.py
-```
-5. Start the Flask app:
-```
-python app.py
-```
 
-### Frontend
+# Start Redis using Docker
+docker run --name redis -p 6379:6379 -d redis  # only once
+docker start redis                              # for future runs
 
-1. Open a new terminal session
+# Run scraper to populate Redis
+python backend/scraper.py
 
-2. Navigate to the frontend folder:
-```
+# Start Flask server
+python backend/app.py
+
+API will be available at: http://127.0.0.1:5000/scraped-content
+
+🌐 Frontend Setup
 cd frontend
-```
-3. Install dependencies:
-```
+
+# Install Vue dependencies
 npm install
-```
-4. Run the app:
-```
+
+# Run development server
 npm run serve
-```
 
-## Expected work
-- Implement scraper logic in `scraper.py` to extract head and header html elements from a page.
-- Complete `/scraped-content` endpoint function in `app.py`
-- Complete the Vue app to dynamically render products.
+App will be available at: http://localhost:8080
 
-## Notes
-- Ensure you have installed all backend and frontend dependencies before running the app.
+🛠️ Folder Structure
+project/
+│
+├── backend/
+│   ├── app.py               # Flask API
+│   ├── scraper.py           # Web scraping logic
+│   └── requirements.txt     # Python deps
+│
+├── frontend/
+│   ├── src/App.vue          # Vue UI
+│   ├── package.json         # Frontend deps
+│   └── ... other config files
+│
+├── venv/                    # Python virtual env
+└── new_readme.md
